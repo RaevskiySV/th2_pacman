@@ -177,6 +177,16 @@ body {
   margin-top: 25vh;
 }
 
+.user-email-input {
+  width: 80%;
+  padding: 10px;
+  margin: 15px 0;
+  font-size: 1.2em;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
 .game-start {
   background-color: #fcc73f;
   border: 5px solid #231f20;

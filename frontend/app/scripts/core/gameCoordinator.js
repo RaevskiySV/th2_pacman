@@ -11,6 +11,7 @@ class GameCoordinator {
     this.fruitDisplay = document.getElementById('fruit-display');
     this.mainMenu = document.getElementById('main-menu-container');
     this.gameStartButton = document.getElementById('game-start');
+    this.userEmailInput = document.getElementById('user-email');
     this.pauseButton = document.getElementById('pause-button');
     this.soundButton = document.getElementById('sound-button');
     this.leftCover = document.getElementById('left-cover');
@@ -148,6 +149,17 @@ class GameCoordinator {
    * Reveals the game underneath the loading covers and starts gameplay
    */
   startButtonClick() {
+    const email = this.userEmailInput.value.trim();
+
+    if (email === '') {
+      alert('Please enter email to start');
+      this.userEmailInput.focus();
+      return;
+    }
+    this.userEmail = email;
+    localStorage.setItem('userEmail', email);
+    this.userEmailInput.style.display = 'none';
+
     this.leftCover.style.left = '-50%';
     this.rightCover.style.right = '-50%';
     this.mainMenu.style.opacity = 0;
@@ -956,35 +968,8 @@ class GameCoordinator {
 
   sendScoreToBackend(score) {
     const data = {
+      email: this.userEmail,
       score: score,
-      // userId: this.userId
-    };
-
-    fetch('https://ваш-адрес-бэкенда/api/save-score', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed');
-        }
-        return response.json();
-      })
-      .then(result => {
-        console.log('Score is saved:', result);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
-
-  sendScoreToBackend(score) {
-    const data = {
-      score: score,
-      // userId: this.userId
     };
 
     fetch('http://localhost:5000/api/saveScore', {

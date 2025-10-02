@@ -192,6 +192,16 @@ body {
   margin-top: 25vh;
 }
 
+.user-email-input {
+    width: 80%;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 1.2em;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
 .game-start {
   background-color: $logo-yellow;
   border: 5px solid $logo-black;

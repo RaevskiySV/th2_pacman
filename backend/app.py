@@ -14,8 +14,10 @@ def save_score():
         if not data:
             return jsonify({"status": "error", "message": "No data"}), 400
 
+        email = data.get('email')
         score = data.get('score')
 
+        print(f'Email: {email}')
         print(f'Score: {score}')
 
         return jsonify({
