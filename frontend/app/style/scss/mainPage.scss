@@ -22,10 +22,10 @@ body {
 }
 
 #game-area-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .backdrop {
@@ -200,23 +200,23 @@ body {
 }
 
 .user-name-input {
-    width: 50%;
-    padding: 10px;
-    margin: 15px 0;
-    font-size: 1.2em;
-    text-align: center;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+  width: 50%;
+  padding: 10px;
+  margin: 15px 0;
+  font-size: 1.2em;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
 }
 
 .user-email-input {
-    width: 50%;
-    padding: 10px;
-    margin: 15px 0;
-    font-size: 1.2em;
-    text-align: center;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+  width: 50%;
+  padding: 10px;
+  margin: 15px 0;
+  font-size: 1.2em;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
 }
 
 .game-start {
@@ -241,32 +241,60 @@ body {
 }
 
 .mobile-controls {
-    margin-top: 20px;
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 5px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .horizontal-btns {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .control-btn {
-    width: 60px;
-    height: 60px;
-    margin: 5px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: white;
-    background-color: #333;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    touch-action: manipulation;
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+.control-btn:active {
+  filter: brightness(1.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.up-btn {
+  background-image: url('../app/style/graphics/spriteSheets/buttons/arrow_right.svg');
+  transform: rotate(270deg);
+}
+
+.down-btn {
+  background-image: url('../app/style/graphics/spriteSheets/buttons/arrow_right.svg');
+  transform: rotate(90deg);
+}
+
+.left-btn {
+  background-image: url('../app/style/graphics/spriteSheets/buttons/arrow_right.svg');
+  transform: rotate(180deg);
+}
+
+.right-btn {
+  background-image: url('../app/style/graphics/spriteSheets/buttons/arrow_right.svg');
 }
 
 @media only screen and (max-width: 600px) {
