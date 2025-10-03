@@ -972,7 +972,7 @@ class GameCoordinator {
       score: score,
     };
 
-    fetch('http://localhost:5000/api/saveScore', {
+    fetch('/api/saveScore', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
