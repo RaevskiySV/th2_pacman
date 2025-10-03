@@ -21,6 +21,13 @@ body {
   touch-action: manipulation;
 }
 
+#game-area-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
 .backdrop {
   position: absolute;
   visibility: hidden;
@@ -192,8 +199,18 @@ body {
   margin-top: 25vh;
 }
 
+.user-name-input {
+    width: 50%;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 1.2em;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
 .user-email-input {
-    width: 80%;
+    width: 50%;
     padding: 10px;
     margin: 15px 0;
     font-size: 1.2em;
@@ -221,6 +238,35 @@ body {
   &:disabled {
     cursor: default;
   }
+}
+
+.mobile-controls {
+    margin-top: 20px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.horizontal-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    background-color: #333;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
 }
 
 @media only screen and (max-width: 600px) {

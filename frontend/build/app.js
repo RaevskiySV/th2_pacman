@@ -1121,9 +1121,14 @@ class GameCoordinator {
     this.fruitDisplay = document.getElementById('fruit-display');
     this.mainMenu = document.getElementById('main-menu-container');
     this.gameStartButton = document.getElementById('game-start');
+    this.userNameInput = document.getElementById('user-name');
     this.userEmailInput = document.getElementById('user-email');
     this.pauseButton = document.getElementById('pause-button');
     this.soundButton = document.getElementById('sound-button');
+    this.btnUp = document.getElementById('btn-up');
+    this.btnDown = document.getElementById('btn-down');
+    this.btnLeft = document.getElementById('btn-left');
+    this.btnRight = document.getElementById('btn-right');
     this.leftCover = document.getElementById('left-cover');
     this.rightCover = document.getElementById('right-cover');
     this.pausedText = document.getElementById('paused-text');
@@ -1259,6 +1264,14 @@ class GameCoordinator {
    * Reveals the game underneath the loading covers and starts gameplay
    */
   startButtonClick() {
+    const name = this.userNameInput.value.trim();
+
+    if (name === '') {
+      alert('Please enter name to start');
+      this.userNameInput.focus();
+      return;
+    }
+
     const email = this.userEmailInput.value.trim();
 
     if (email === '') {
@@ -1266,6 +1279,11 @@ class GameCoordinator {
       this.userEmailInput.focus();
       return;
     }
+
+    this.userName = name;
+    localStorage.setItem('userName', name);
+    this.userNameInput.style.display = 'none';
+
     this.userEmail = email;
     localStorage.setItem('userEmail', email);
     this.userEmailInput.style.display = 'none';
@@ -1635,7 +1653,7 @@ class GameCoordinator {
    */
   init() {
     this.registerEventListeners();
-    this.registerTouchListeners();
+    // this.registerTouchListeners();
 
     this.gameEngine = new GameEngine(this.maxFps, this.entityList);
     this.gameEngine.start();
@@ -1837,6 +1855,31 @@ class GameCoordinator {
     window.addEventListener('addTimer', this.addTimer.bind(this));
     window.addEventListener('removeTimer', this.removeTimer.bind(this));
     window.addEventListener('releaseGhost', this.releaseGhost.bind(this));
+
+    const dispatchSwipeEvent = (direction) => {
+      window.dispatchEvent(new CustomEvent('swipe', {
+        detail: { direction: direction },
+      }));
+    };
+
+    const bindControlButton = (button, direction) => {
+      if (button) {
+        button.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          dispatchSwipeEvent(direction);
+        });
+
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          dispatchSwipeEvent(direction);
+        });
+      }
+    };
+
+    bindControlButton(this.btnUp, 'up');
+    bindControlButton(this.btnDown, 'down');
+    bindControlButton(this.btnLeft, 'left');
+    bindControlButton(this.btnRight, 'right');
   }
 
   /**
@@ -2078,11 +2121,12 @@ class GameCoordinator {
 
   sendScoreToBackend(score) {
     const data = {
+      name: this.userName,
       email: this.userEmail,
       score: score,
     };
 
-    fetch('http://localhost:5000/api/saveScore', {
+    fetch('/api/saveScore', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
