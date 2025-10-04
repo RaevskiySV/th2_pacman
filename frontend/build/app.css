@@ -190,19 +190,16 @@ body {
   /*margin: 15px 0;*/
   font-size: 1.2em;
   text-align: center;
-  border: 3px solid #ff0000; 
+  border: 3px solid #ff0000;
   border-radius: 10px;
   outline: 3px solid #000000;
-
   position: absolute;
   top: 80%;
 }
 
 .user-name-input:focus {
-  border-color: #6dbafa; 
+  border-color: #6dbafa;
 }
-
-
 
 .user-email-input {
   width: 40%;
@@ -213,13 +210,12 @@ body {
   border: 3px solid #ff0000;
   border-radius: 10px;
   outline: 3px solid #000000;
-
   position: absolute;
   top: 85%;
 }
 
 .user-email-input:focus {
-  border-color: #6dbafa; 
+  border-color: #6dbafa;
 }
 
 .game-start {

@@ -53,9 +53,9 @@ class Ghost {
     const pacmanSpeed = pacman.velocityPerMs;
     const levelAdjustment = level / 100;
 
-    this.slowSpeed = pacmanSpeed * (0.75 + levelAdjustment);
-    this.mediumSpeed = pacmanSpeed * (0.875 + levelAdjustment);
-    this.fastSpeed = pacmanSpeed * (1 + levelAdjustment);
+    this.slowSpeed = pacmanSpeed * (0.5 + levelAdjustment);  
+    this.mediumSpeed = pacmanSpeed * (0.6 + levelAdjustment);   
+    this.fastSpeed = pacmanSpeed * (0.8 + levelAdjustment);
 
     if (!this.defaultSpeed) {
       this.defaultSpeed = this.slowSpeed;
@@ -63,7 +63,7 @@ class Ghost {
 
     this.scaredSpeed = pacmanSpeed * 0.5;
     this.transitionSpeed = pacmanSpeed * 0.4;
-    this.eyeSpeed = pacmanSpeed * 2;
+    this.eyeSpeed = pacmanSpeed * 1.5;
 
     this.velocityPerMs = this.defaultSpeed;
     this.moving = false;
@@ -1729,7 +1729,7 @@ class GameCoordinator {
    */
   startGameplay(initialStart) {
     if (initialStart) {
-     /* this.soundManager.play('game_start'); */
+      /* this.soundManager.play('game_start'); */
     }
 
     this.scaredGhosts = [];
@@ -1750,7 +1750,7 @@ class GameCoordinator {
       this.cutscene = false;
       this.soundManager.setCutscene(this.cutscene);
       this.soundManager.setAmbience(this.determineSiren(this.remainingDots));
-      
+     
       this.allowPacmanMovement = true;
       this.pacman.moving = true;
 
