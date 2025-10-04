@@ -88,7 +88,7 @@ class Pacman {
    */
   calculateVelocityPerMs(scaledTileSize) {
     // In the original game, Pacman moved at 11 tiles per second.
-    const velocityPerSecond = scaledTileSize * 11;
+    const velocityPerSecond = scaledTileSize * 5;
     return velocityPerSecond / 1000;
   }
 

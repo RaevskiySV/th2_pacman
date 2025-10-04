@@ -203,6 +203,7 @@ class GameCoordinator {
     this.soundManager.setMasterVolume(newVolume);
     localStorage.setItem('volumePreference', newVolume);
     this.setSoundButtonIcon(newVolume);
+    this.soundManager.setAmbience(this.determineSiren(this.remainingDots));
   }
 
   /**
@@ -531,7 +532,7 @@ class GameCoordinator {
     this.clearDisplay(this.fruitDisplay);
 
     const volumePreference = parseInt(
-      localStorage.getItem('volumePreference') || 1,
+      localStorage.getItem('volumePreference') || 0,
       10,
     );
     this.setSoundButtonIcon(volumePreference);
@@ -618,7 +619,7 @@ class GameCoordinator {
    */
   startGameplay(initialStart) {
     if (initialStart) {
-      this.soundManager.play('game_start');
+      /* this.soundManager.play('game_start'); */
     }
 
     this.scaredGhosts = [];
@@ -639,7 +640,7 @@ class GameCoordinator {
       this.cutscene = false;
       this.soundManager.setCutscene(this.cutscene);
       this.soundManager.setAmbience(this.determineSiren(this.remainingDots));
-
+     
       this.allowPacmanMovement = true;
       this.pacman.moving = true;
 

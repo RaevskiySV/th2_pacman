@@ -45,6 +45,7 @@ class SoundManager {
    * @param {String} sound
    */
   play(sound) {
+
     this.soundEffect = new Audio(`${this.baseUrl}${sound}.${this.fileFormat}`);
     this.soundEffect.volume = this.masterVolume;
     this.soundEffect.play();
@@ -86,6 +87,7 @@ class SoundManager {
    * @param {String} sound
    */
   async setAmbience(sound, keepCurrentAmbience) {
+
     if (!this.fetchingAmbience && !this.cutscene) {
       if (!keepCurrentAmbience) {
         this.currentAmbience = sound;

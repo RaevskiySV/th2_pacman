@@ -932,7 +932,7 @@ class Pacman {
    */
   calculateVelocityPerMs(scaledTileSize) {
     // In the original game, Pacman moved at 11 tiles per second.
-    const velocityPerSecond = scaledTileSize * 11;
+    const velocityPerSecond = scaledTileSize * 5;
     return velocityPerSecond / 1000;
   }
 
@@ -1313,6 +1313,7 @@ class GameCoordinator {
     this.soundManager.setMasterVolume(newVolume);
     localStorage.setItem('volumePreference', newVolume);
     this.setSoundButtonIcon(newVolume);
+    this.soundManager.setAmbience(this.determineSiren(this.remainingDots));
   }
 
   /**
@@ -1641,7 +1642,7 @@ class GameCoordinator {
     this.clearDisplay(this.fruitDisplay);
 
     const volumePreference = parseInt(
-      localStorage.getItem('volumePreference') || 1,
+      localStorage.getItem('volumePreference') || 0,
       10,
     );
     this.setSoundButtonIcon(volumePreference);
@@ -1728,7 +1729,7 @@ class GameCoordinator {
    */
   startGameplay(initialStart) {
     if (initialStart) {
-      this.soundManager.play('game_start');
+     /* this.soundManager.play('game_start'); */
     }
 
     this.scaredGhosts = [];
@@ -1749,7 +1750,7 @@ class GameCoordinator {
       this.cutscene = false;
       this.soundManager.setCutscene(this.cutscene);
       this.soundManager.setAmbience(this.determineSiren(this.remainingDots));
-
+      
       this.allowPacmanMovement = true;
       this.pacman.moving = true;
 
@@ -3183,6 +3184,7 @@ class SoundManager {
    * @param {String} sound
    */
   play(sound) {
+
     this.soundEffect = new Audio(`${this.baseUrl}${sound}.${this.fileFormat}`);
     this.soundEffect.volume = this.masterVolume;
     this.soundEffect.play();
@@ -3224,6 +3226,7 @@ class SoundManager {
    * @param {String} sound
    */
   async setAmbience(sound, keepCurrentAmbience) {
+
     if (!this.fetchingAmbience && !this.cutscene) {
       if (!keepCurrentAmbience) {
         this.currentAmbience = sound;
