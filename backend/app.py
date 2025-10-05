@@ -71,5 +71,67 @@ def save_score():
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
+def get_leaderboard_data(start_index, end_index):
+    raw_leaderboard = r.zrevrange(
+        LEADERBOARD_KEY,
+        start_index,
+        end_index,
+        withscores=True
+    )
+
+    leaderboard = []
+
+    for rank_index, (email, score) in enumerate(raw_leaderboard):
+        user_hash_key = f"user:{email}"
+        name = r.hget(user_hash_key, 'name')
+
+        leaderboard.append({
+            "rank": rank_index + start_index + 1,
+            "email": email,
+            "name": name if name else "Unknown",
+            "score": int(score)
+        })
+
+    return leaderboard
+
+
+@app.route('/api/getTop1', methods=['GET'])
+def get_top_1():
+    try:
+        top_player = get_leaderboard_data(0, 0)
+
+        if not top_player:
+            return jsonify({"status": "success", "message": "No scores yet.", "player": []}), 200
+
+        return jsonify({
+            "status": "success",
+            "message": "Successfully retrieved top-1 player.",
+            "player": top_player[0]
+        }), 200
+
+    except Exception as e:
+        app.logger.exception(f"Error retrieving top-1 player: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@app.route('/api/getLeaderboard', methods=['GET'])
+def get_leaderboard():
+    try:
+        top_10 = get_leaderboard_data(0, 9)
+
+        if not top_10:
+            return jsonify({"status": "success", "message": "No scores yet.", "leaderboard": []}), 200
+
+        return jsonify({
+            "status": "success",
+            "message": "Successfully retrieved leaderboard.",
+            "leaderboard": top_10
+        }), 200
+
+    except Exception as e:
+        app.logger.exception(f"Error retrieving leaderboard: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(port=8081)
