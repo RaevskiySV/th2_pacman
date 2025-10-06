@@ -216,6 +216,7 @@ body {
 
 .user-name-input {
   width: 75%;
+  max-width: 320px;
   padding: 10px;
   /*margin: 15px 0;*/
   font-size: 1.2em;
@@ -225,7 +226,7 @@ body {
   outline: 3px solid #000000;
 
   position: absolute;
-  top: 80%;
+  top: 65%;
 }
 
 .user-name-input:focus {
@@ -234,6 +235,7 @@ body {
 
 .user-email-input {
   width: 75%;
+  max-width: 320px;
   padding: 10px;
   margin: 15px 0;
   font-size: 1.2em;
@@ -243,7 +245,7 @@ body {
   outline: 3px solid #000000;
 
   position: absolute;
-  top: 85%;
+  top: 70%;
 }
 
 .user-email-input:focus {
