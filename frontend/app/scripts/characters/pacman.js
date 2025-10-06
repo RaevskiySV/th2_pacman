@@ -104,7 +104,7 @@ class Pacman {
   prepDeathAnimation() {
     this.loopAnimation = false;
     this.msBetweenSprites = 125;
-    this.spriteFrames = 11;
+    this.spriteFrames = 13;
     this.specialAnimation = true;
     this.backgroundOffsetPixels = 0;
     const bgSize = this.measurement * this.spriteFrames;
