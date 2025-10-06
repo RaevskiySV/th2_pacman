@@ -137,36 +137,6 @@
         <div class='loading-dot _95'></div>
       </div>
 
-      <div id="leaderboard-modal" class="modal-backdrop hidden">
-        <div class="modal-content">
-          <h2>LEADERBOARD</h2>
-
-          <div id="leaderboard-table-container">
-            <div id="leaderboard-error-message-display" style="display: none;"></div>
-            <table class="leaderboard-table">
-              <thead>
-                <tr>
-                  <th class="place">#</th>
-                  <th>NAME</th>
-                  <th class="score">SCORE</th>
-                </tr>
-              </thead>
-                <tbody id="leaderboard-body"></tbody>
-            </table>
-          </div>
-
-          <template id="leaderboard-row-template">
-            <tr>
-              <td class="place" data-leaderboard-place></td>
-              <td data-leaderboard-name></td>
-              <td class="score" data-leaderboard-score></td>
-            </tr>
-          </template>
-
-          <button id="modal-close-btn" class="close-btn">X</button>
-        </div>
-      </div>
-
       <div id='error-message' class='error-message'>
         <div class='header'>
           <div>OOPS!</div>
@@ -185,6 +155,35 @@
           let gameCoordinator = new GameCoordinator();
         }
       </script>
+    </div>
+    <div id="leaderboard-modal" class="modal-backdrop hidden">
+      <div class="modal-content">
+        <h2>LEADERBOARD</h2>
+
+        <div id="leaderboard-table-container">
+          <div id="leaderboard-error-message-display" style="display: none;"></div>
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th class="place">#</th>
+                <th>NAME</th>
+                <th class="score">SCORE</th>
+              </tr>
+            </thead>
+              <tbody id="leaderboard-body"></tbody>
+          </table>
+        </div>
+
+        <template id="leaderboard-row-template">
+          <tr>
+            <td class="place" data-leaderboard-place></td>
+            <td data-leaderboard-name></td>
+            <td class="score" data-leaderboard-score></td>
+          </tr>
+        </template>
+
+        <button id="modal-close-btn" class="close-btn">X</button>
+      </div>
     </div>
   </body>
 </html>
