@@ -53,8 +53,8 @@ body {
 }
 
 .header-buttons {
-  padding: 2rem 3rem;
-  width: calc(100vw - 80rem);
+  padding: 1rem;
+  width: auto;
   position: absolute;
   top: 0;
   left: 0;
@@ -62,7 +62,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+}
+.header-buttons span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .header-buttons a {
   font-family: none;
