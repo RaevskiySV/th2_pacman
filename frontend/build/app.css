@@ -336,7 +336,7 @@ body {
   }
 }
 .loading-pacman {
-  animation: loading-animation 0.3s steps(4) infinite;
+  animation: loading-animation 0.3s steps(1) infinite;
   background-color: #000;
   background-image: url("../app/style/graphics/spriteSheets/characters/pacman/pacman_right.svg");
   background-size: 192px;
