@@ -193,6 +193,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   height: 100%;
   left: 0;
   opacity: 0;
@@ -204,7 +205,7 @@ body {
 }
 
 .logo {
-  width: 800px;
+  width: 600px;
   max-width: 80vw;
   margin-top: 10vh;
 }
@@ -213,14 +214,11 @@ body {
   width: 75%;
   max-width: 320px;
   padding: 10px;
-  /*margin: 15px 0;*/
   font-size: 1em;
   text-align: center;
   border: 3px solid #ff0000;
   border-radius: 10px;
   outline: 3px solid #000000;
-  position: absolute;
-  top: 70%;
 }
 
 .user-name-input:focus {
@@ -237,8 +235,6 @@ body {
   border: 3px solid #ff0000;
   border-radius: 10px;
   outline: 3px solid #000000;
-  position: absolute;
-  top: 75%;
 }
 
 .user-email-input:focus {
