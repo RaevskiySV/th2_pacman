@@ -277,6 +277,12 @@ body {
   align-items: center;
 }
 
+@media (min-width: 1000px) {
+  .mobile-controls {
+    display: none;
+  }
+}
+
 .horizontal-btns {
   display: flex;
   justify-content: space-between;
