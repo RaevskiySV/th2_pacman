@@ -54,7 +54,7 @@ body {
 
 .header-buttons {
   padding: 2rem 3rem;
-  width: calc(100vw - 6rem);
+  width: calc(100vw - 80rem);
   position: absolute;
   top: 0;
   left: 0;
@@ -81,12 +81,6 @@ body {
 }
 .header-buttons button .material-icons {
   font-size: 40px;
-}
-.header-buttons .leaderboard-button {
-  background-image: url("../app/style/graphics/spriteSheets/buttons/leaderboard_btn.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .paused-text {
@@ -123,6 +117,9 @@ body {
 .game-ui .row {
   display: flex;
 }
+.game-ui .top {
+  align-items: center;
+}
 .game-ui .top ._25 {
   width: 25%;
 }
@@ -135,6 +132,11 @@ body {
 .game-ui .top .column :not(:first-child) {
   margin-right: calc(50% - 3em);
   text-align: right;
+}
+.game-ui .top .column:last-child {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0;
 }
 .game-ui .bottom {
   justify-content: space-between;
@@ -157,6 +159,11 @@ body {
   padding: 0;
   user-select: none;
   display: inline-block;
+  background-image: url("../app/style/graphics/spriteSheets/buttons/leaderboard_btn.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
 }
 
 .loading-cover {

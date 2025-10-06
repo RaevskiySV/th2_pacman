@@ -320,6 +320,7 @@ class GameCoordinator {
         `${imgBase}characters/pacman/arrow_left.svg`,
         `${imgBase}characters/pacman/arrow_right.svg`,
         `${imgBase}characters/pacman/arrow_up.svg`,
+        `${imgBase}characters/pacman/pacman_load.svg`,
         `${imgBase}characters/pacman/pacman_death.svg`,
         `${imgBase}characters/pacman/pacman_error.svg`,
         `${imgBase}characters/pacman/pacman_down.svg`,
@@ -400,6 +401,13 @@ class GameCoordinator {
 
         // Maze
         `${imgBase}maze/maze_blue.svg`,
+
+        // Buttons
+        `${imgBase}buttons/arrow_down.svg`,
+        `${imgBase}buttons/arrow_left.svg`,
+        `${imgBase}buttons/arrow_right.svg`,
+        `${imgBase}buttons/arrow_up.svg`,
+        `${imgBase}buttons/leaderboard_btn.svg`,
 
         // Misc
         'app/style/graphics/extra_life.svg',
