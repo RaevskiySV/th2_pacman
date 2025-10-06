@@ -82,6 +82,12 @@ body {
 .header-buttons button .material-icons {
   font-size: 40px;
 }
+.header-buttons .leaderboard-button {
+  background-image: url("../app/style/graphics/spriteSheets/buttons/leaderboard_btn.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 .paused-text {
   align-items: center;
@@ -145,17 +151,12 @@ body {
 .leaderboard-button {
   width: 155px;
   height: 40px;
-  background: none;
   border: none;
   cursor: pointer;
   outline: none;
   padding: 0;
   user-select: none;
   display: inline-block;
-  background-image: url("../app/style/graphics/spriteSheets/buttons/leaderboard_btn.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .loading-cover {
