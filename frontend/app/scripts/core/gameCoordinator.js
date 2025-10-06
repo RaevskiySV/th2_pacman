@@ -7,6 +7,7 @@ class GameCoordinator {
     this.mazeCover = document.getElementById('maze-cover');
     this.pointsDisplay = document.getElementById('points-display');
     this.highScoreDisplay = document.getElementById('high-score-display');
+    this.leaderboardButton = document.getElementById('leaderboard-button');
     this.extraLivesDisplay = document.getElementById('extra-lives');
     this.fruitDisplay = document.getElementById('fruit-display');
     this.mainMenu = document.getElementById('main-menu-container');
@@ -99,15 +100,10 @@ class GameCoordinator {
       this.mazeArray[rowIndex] = row[0].split('');
     });
 
-    this.gameStartButton.addEventListener(
-      'click',
-      this.startButtonClick.bind(this),
-    );
+    this.gameStartButton.addEventListener('click', this.startButtonClick.bind(this));
     this.pauseButton.addEventListener('click', this.handlePauseKey.bind(this));
-    this.soundButton.addEventListener(
-      'click',
-      this.soundButtonClick.bind(this),
-    );
+    this.soundButton.addEventListener('click', this.soundButtonClick.bind(this));
+    this.leaderboardButton.addEventListener('click', this.leaderboardButtonClick.bind(this));
 
     const head = document.getElementsByTagName('head')[0];
     const link = document.createElement('link');
@@ -204,6 +200,30 @@ class GameCoordinator {
     localStorage.setItem('volumePreference', newVolume);
     this.setSoundButtonIcon(newVolume);
     this.soundManager.setAmbience(this.determineSiren(this.remainingDots));
+  }
+
+  /**
+   * Fetches leaderboard (top-10), and shows it in modal window
+   */
+  leaderboardButtonClick() {
+    fetch('/api/getLeaderboard', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed');
+        }
+        return response.json();
+      })
+      .then(result => {
+        this.showLeaderboardModal(leaderboardData);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }
 
   /**
