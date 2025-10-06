@@ -199,7 +199,7 @@ body {
 }
 
 .user-name-input {
-  width: 40%;
+  width: 75%;
   padding: 10px;
   /*margin: 15px 0;*/
   font-size: 1.2em;
@@ -216,7 +216,7 @@ body {
 }
 
 .user-email-input {
-  width: 40%;
+  width: 75%;
   padding: 10px;
   margin: 15px 0;
   font-size: 1.2em;
@@ -253,6 +253,7 @@ body {
 
 .mobile-controls {
   margin-top: 5px;
+  margin-bottom: 60px;
   width: 75%;
   display: flex;
   flex-direction: column;
