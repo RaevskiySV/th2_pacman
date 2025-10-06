@@ -293,18 +293,15 @@ body {
 }
 
 .up-btn {
-  background-image: url("../app/style/graphics/spriteSheets/buttons/arrow_right.svg");
-  transform: rotate(270deg);
+  background-image: url("../app/style/graphics/spriteSheets/buttons/arrow_up.svg");
 }
 
 .down-btn {
-  background-image: url("../app/style/graphics/spriteSheets/buttons/arrow_right.svg");
-  transform: rotate(90deg);
+  background-image: url("../app/style/graphics/spriteSheets/buttons/arrow_down.svg");
 }
 
 .left-btn {
-  background-image: url("../app/style/graphics/spriteSheets/buttons/arrow_right.svg");
-  transform: rotate(180deg);
+  background-image: url("../app/style/graphics/spriteSheets/buttons/arrow_left.svg");
 }
 
 .right-btn {
