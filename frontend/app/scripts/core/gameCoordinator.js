@@ -214,16 +214,66 @@ class GameCoordinator {
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Failed');
+          return { status: 'error', message: 'Failed to load leaderboard data.' };
         }
         return response.json();
       })
       .then(result => {
-        this.showLeaderboardModal(leaderboardData);
+        this.showLeaderboardModal(result);
       })
       .catch(error => {
         console.error('Error:', error);
+        this.showLeaderboardModal({ status: 'error', message: 'Exception occurred.' });
       });
+  }
+
+  /**
+   * Leaderboard modal window logic
+   */
+  showLeaderboardModal(data) {
+    const modal = document.getElementById('leaderboard-modal');
+    const tableBody = document.getElementById('leaderboard-body');
+    const table = document.querySelector('.leaderboard-table');
+    const errorDisplay = document.getElementById('leaderboard-error-message-display');
+    const rowTemplate = document.getElementById('leaderboard-row-template').content;
+
+    tableBody.innerHTML = '';
+    errorDisplay.style.display = 'none';
+
+    if (data.status === 'error') {
+      table.style.display = 'none';
+      errorDisplay.textContent = data.message || 'No data available.';
+      errorDisplay.style.display = 'block';
+
+    } else {
+      table.style.display = 'table';
+
+      const leaderboardData = data.leaderboard;
+
+      leaderboardData.forEach(entry => {
+        const row = document.importNode(rowTemplate, true);
+
+        row.querySelector('[data-leaderboard-place]').textContent = entry.rank;
+        row.querySelector('[data-leaderboard-name]').textContent = entry.name;
+        row.querySelector('[data-leaderboard-score]').textContent = entry.score;
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    const closeBtn = document.getElementById('modal-close-btn');
+    if (!modal.dataset.listenerAttached) {
+      closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+        }
+      });
+      modal.dataset.listenerAttached = 'true';
+    }
+
+    modal.classList.remove('hidden');
   }
 
   /**
