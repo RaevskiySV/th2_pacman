@@ -263,17 +263,23 @@ class GameCoordinator {
 
     const closeBtn = document.getElementById('modal-close-btn');
     if (!modal.dataset.listenerAttached) {
-      closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+      closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        this.gameEngine.changePausedState(this.gameEngine.running);
+      });
 
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
           modal.classList.add('hidden');
+          this.gameEngine.changePausedState(this.gameEngine.running);
         }
       });
       modal.dataset.listenerAttached = 'true';
     }
 
     modal.classList.remove('hidden');
+
+    this.gameEngine.changePausedState(this.gameEngine.running);
   }
 
   /**
