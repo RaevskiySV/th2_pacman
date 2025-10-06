@@ -143,18 +143,19 @@ body {
 }
 
 .leaderboard-button {
+  width: 155px;
+  height: 40px;
   background: none;
   border: none;
-  color: #fff;
   cursor: pointer;
   outline: none;
   padding: 0;
-  font-size: 1em;
   user-select: none;
   display: inline-block;
-}
-.leaderboard-button:active {
-  opacity: 0.8;
+  background-image: url("../app/style/graphics/spriteSheets/buttons/leaderboard_btn.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .loading-cover {
