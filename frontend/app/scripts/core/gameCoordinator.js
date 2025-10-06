@@ -60,8 +60,8 @@ class GameCoordinator {
     ];
 
     this.maxFps = 120;
-    this.tileSize = 8;
-    this.scale = this.determineScale(1);
+    this.tileSize = 10;
+    this.scale = this.determineScale();
     this.scaledTileSize = this.tileSize * this.scale;
     this.firstGame = true;
 
@@ -116,10 +116,10 @@ class GameCoordinator {
   }
 
   /**
-   * Recursive method which determines the largest possible scale the game's graphics can use
+   * Method which determines the largest possible scale the game's graphics can use
    * @param {Number} scale
    */
-  determineScale(scale) {
+  determineScale() {
     const availableScreenHeight = Math.min(
       document.documentElement.clientHeight,
       window.innerHeight || 0,
@@ -128,7 +128,6 @@ class GameCoordinator {
       document.documentElement.clientWidth,
       window.innerWidth || 0,
     );
-    const scaledTileSize = this.tileSize * scale;
 
     // The original Pac-Man game leaves 5 tiles of height (3 above, 2 below) surrounding the
     // maze for the UI. See app\style\graphics\spriteSheets\references\mazeGridSystemReference.png
@@ -136,14 +135,15 @@ class GameCoordinator {
     const mazeTileHeight = this.mazeArray.length + 5;
     const mazeTileWidth = this.mazeArray[0][0].split('').length;
 
-    if (
-      scaledTileSize * mazeTileHeight < availableScreenHeight
-      && scaledTileSize * mazeTileWidth < availableScreenWidth
-    ) {
-      return this.determineScale(scale + 1);
-    }
+    const requiredPixelHeight = this.tileSize * mazeTileHeight;
+    const requiredPixelWidth = this.tileSize * mazeTileWidth;
 
-    return scale - 1;
+    const scaleByHeight = availableScreenHeight / requiredPixelHeight;
+    const scaleByWidth = availableScreenWidth / requiredPixelWidth;
+
+    const optimalScale = Math.min(scaleByHeight, scaleByWidth);
+
+    return Math.floor(optimalScale);
   }
 
   /**
