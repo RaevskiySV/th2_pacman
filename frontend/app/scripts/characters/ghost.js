@@ -687,7 +687,7 @@ class Ghost {
   }
 
   /**
-   * Toggles a scared ghost between blue and white, then updates its spritsheet
+   * Toggles a scared ghost between blue and white, then updates its spritesheet
    */
   toggleScaredColor() {
     this.scaredColor = (this.scaredColor === 'blue')

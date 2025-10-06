@@ -687,7 +687,7 @@ class Ghost {
   }
 
   /**
-   * Toggles a scared ghost between blue and white, then updates its spritsheet
+   * Toggles a scared ghost between blue and white, then updates its spritesheet
    */
   toggleScaredColor() {
     this.scaredColor = (this.scaredColor === 'blue')
@@ -887,7 +887,7 @@ class Pacman {
     this.loopAnimation = true;
     this.msBetweenSprites = 50;
     this.msSinceLastSprite = 0;
-    this.spriteFrames = 1;
+    this.spriteFrames = 4;
     this.backgroundOffsetPixels = 0;
     this.animationTarget.style.backgroundPosition = '0px 0px';
   }
