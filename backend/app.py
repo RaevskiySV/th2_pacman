@@ -79,12 +79,19 @@ def get_leaderboard_data(start_index, end_index):
         withscores=True
     )
 
+    if not raw_leaderboard:
+        return []
+
+    pipe = r.pipeline()
+    for email, _ in raw_leaderboard:
+        user_hash_key = f"user:{email}"
+        pipe.hget(user_hash_key, 'name')
+
+    names = pipe.execute()
+
     leaderboard = []
 
-    for rank_index, (email, score) in enumerate(raw_leaderboard):
-        user_hash_key = f"user:{email}"
-        name = r.hget(user_hash_key, 'name')
-
+    for rank_index, ((email, score), name) in enumerate(zip(raw_leaderboard, names)):
         leaderboard.append({
             "rank": rank_index + start_index + 1,
             "email": email,
