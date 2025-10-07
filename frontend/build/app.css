@@ -207,13 +207,14 @@ body {
 .logo {
   width: 600px;
   max-width: 80vw;
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
 
 .user-name-input {
   width: 75%;
   max-width: 320px;
   padding: 10px;
+  margin-top: 10px;
   font-size: 0.8em;
   text-align: center;
   border: 3px solid #ff0000;
