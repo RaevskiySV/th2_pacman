@@ -215,7 +215,7 @@ body {
   max-width: 320px;
   padding: 10px;
   margin: 15px 0;
-  font-size: 1em;
+  font-size: 0.8em;
   text-align: center;
   border: 3px solid #ff0000;
   border-radius: 10px;
@@ -230,7 +230,7 @@ body {
   width: 75%;
   max-width: 320px;
   padding: 10px;
-  font-size: 1em;
+  font-size: 0.8em;
   text-align: center;
   border: 3px solid #ff0000;
   border-radius: 10px;

@@ -1276,6 +1276,14 @@ class GameCoordinator {
       return;
     }
 
+    const emailValidation = this.validateEmail(email);
+    if (!emailValidation.isValid) {
+      alert(emailValidation.message || 'Please enter a valid email address');
+      this.userEmailInput.focus();
+      this.userEmailInput.select();
+      return;
+    }
+
     this.userName = name;
     localStorage.setItem('userName', name);
     this.userNameInput.style.display = 'none';
@@ -1299,6 +1307,59 @@ class GameCoordinator {
       this.init();
     }
     this.startGameplay(true);
+  }
+
+  validateEmail(email) {
+    if (!email) {
+      return { isValid: false, message: 'Email cannot be empty' };
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return { isValid: false, message: 'Please enter a valid email address (example: user@domain.com)' };
+    }
+
+    const atIndex = email.indexOf('@');
+    const localPart = email.substring(0, atIndex);
+    if (localPart.length > 64) {
+      return { isValid: false, message: 'Local part of email is too long' };
+    }
+
+    const domainPart = email.substring(atIndex + 1);
+    if (domainPart.length > 253) {
+      return { isValid: false, message: 'Domain part of email is too long' };
+    }
+
+    if (!this.isValidDomain(domainPart)) {
+      return { isValid: false, message: 'Invalid domain in email address' };
+    }
+
+    return { isValid: true };
+  }
+
+  isValidDomain(domain) {
+    const domainParts = domain.split('.');
+    
+    if (domainParts.length < 2) {
+      return false;
+    }
+
+    for (const part of domainParts) {
+      if (!part || part.length > 63) {
+        return false;
+      }
+      
+      const domainPartRegex = /^[a-zA-Z0-9-]+$/;
+      if (!domainPartRegex.test(part)) {
+        return false;
+      }
+      
+      if (part.startsWith('-') || part.endsWith('-')) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /**
