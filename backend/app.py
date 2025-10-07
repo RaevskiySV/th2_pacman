@@ -141,7 +141,7 @@ def get_leaderboard():
 
 
 @app.route('/api/getAll', methods=['GET'])
-def get_leaderboard():
+def get_all_data():
     try:
         all_data = get_leaderboard_data(0, -1)
 
