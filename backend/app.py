@@ -140,5 +140,24 @@ def get_leaderboard():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
+@app.route('/api/getAll', methods=['GET'])
+def get_leaderboard():
+    try:
+        all_data = get_leaderboard_data(0, -1)
+
+        if not all_data:
+            return jsonify({"status": "success", "message": "No scores yet.", "data": []}), 200
+
+        return jsonify({
+            "status": "success",
+            "message": "Successfully retrieved all data.",
+            "data": all_data
+        }), 200
+
+    except Exception as e:
+        app.logger.exception(f"Error retrieving all data: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(port=8081)
