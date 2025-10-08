@@ -264,15 +264,10 @@ class GameCoordinator {
   }
 
   /**
-   * Fetches leaderboard (top-10), and shows it in modal window
+   * Fetches leaderboard (top-10) from backend using GET request, and shows it in modal window
    */
   leaderboardButtonClick() {
-    fetch('/api/getLeaderboard', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
+    fetch('/api/getLeaderboard')
       .then(response => {
         if (!response.ok) {
           return { status: 'error', message: 'Failed to load leaderboard data.' };
@@ -584,7 +579,7 @@ class GameCoordinator {
     this.allowPacmanMovement = false;
     this.allowPause = false;
     this.cutscene = true;
-    this.highScore = localStorage.getItem(`highScore_${this.userEmail}`) || 0;
+    this.highScore = this.getHighScoreFromBackend();
 
     if (this.firstGame) {
       setInterval(() => {
@@ -682,6 +677,37 @@ class GameCoordinator {
     );
     this.setSoundButtonIcon(volumePreference);
     this.soundManager.setMasterVolume(volumePreference);
+  }
+
+  /**
+   * Gets high score from backend using GET request
+   */
+  getHighScoreFromBackend() {
+    const email = this.userEmail;
+    const url = `/api/getPlayer?email=${encodeURIComponent(email)}`;
+
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const serverHighScore = (data.player && data.player.score) || 0;
+        this.highScore = serverHighScore;
+        localStorage.setItem(`highScore_${email}`, serverHighScore);
+        console.log('High score loaded:', serverHighScore);
+        return serverHighScore;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+
+        const fallbackHighScore = localStorage.getItem(`highScore_${this.userEmail}`) || 0;
+        this.highScore = fallbackHighScore;
+
+        console.log('Using local fallback high score:', fallbackHighScore);
+      });
   }
 
   /**
@@ -1155,6 +1181,9 @@ class GameCoordinator {
     }, 2250);
   }
 
+  /**
+   * Saves score via backend using POST request
+   */
   sendScoreToBackend(score) {
     const data = {
       name: this.userName,

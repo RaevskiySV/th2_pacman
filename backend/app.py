@@ -102,13 +102,60 @@ def get_leaderboard_data(start_index, end_index):
     return leaderboard
 
 
+@app.route('/api/getPlayer', methods=['GET'])
+def get_player_data():
+    email = request.args.get('email')
+
+    if not email:
+        return jsonify({"status": "error", "message": "Missing 'email' query parameter."}), 400
+
+    try:
+        pipe = r.pipeline()
+
+        user_hash_key = f"user:{email}"
+
+        pipe.zrevrank(LEADERBOARD_KEY, email)
+        pipe.zscore(LEADERBOARD_KEY, email)
+        pipe.hget(user_hash_key, 'name')
+
+        results = pipe.execute()
+
+        player_rank_zero_indexed = results[0]
+        score = results[1]
+        name = results[2]
+
+        if player_rank_zero_indexed is None:
+            return jsonify({
+                "status": "success",
+                "message": f"Player {email} not found in leaderboard.",
+                "player": {}
+            }), 200
+
+        player_data = {
+            "rank": player_rank_zero_indexed + 1,
+            "email": email,
+            "name": name if name else "Unknown",
+            "score": int(score) if score is not None else 0
+        }
+
+        return jsonify({
+            "status": "success",
+            "message": "Successfully retrieved player data.",
+            "player": player_data
+        }), 200
+
+    except Exception as e:
+        app.logger.exception(f"Error retrieving player data for {email}: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
 @app.route('/api/getTop1', methods=['GET'])
 def get_top_1():
     try:
         top_player = get_leaderboard_data(0, 0)
 
         if not top_player:
-            return jsonify({"status": "success", "message": "No scores yet.", "player": []}), 200
+            return jsonify({"status": "success", "message": "No scores yet.", "player": {}}), 200
 
         return jsonify({
             "status": "success",
