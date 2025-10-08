@@ -1778,7 +1778,6 @@ class GameCoordinator {
     }
 
     this.pointsDisplay.innerHTML = '00';
-    this.highScoreDisplay.innerHTML = this.highScore || '00';
     this.clearDisplay(this.fruitDisplay);
 
     const volumePreference = parseInt(
@@ -1807,6 +1806,7 @@ class GameCoordinator {
         const serverHighScore = (data.player && data.player.score) || 0;
         this.highScore = serverHighScore;
         localStorage.setItem(`highScore_${email}`, serverHighScore);
+        this.updateHighScoreDisplay();
         console.log('High score loaded:', serverHighScore);
         return serverHighScore;
       })
@@ -1815,9 +1815,19 @@ class GameCoordinator {
 
         const fallbackHighScore = localStorage.getItem(`highScore_${this.userEmail}`) || 0;
         this.highScore = fallbackHighScore;
+        this.updateHighScoreDisplay();
 
         console.log('Using local fallback high score:', fallbackHighScore);
       });
+  }
+
+  /**
+   * Updates high score display
+   */
+  updateHighScoreDisplay() {
+    const scoreToDisplay = Number(this.highScore) || 0;
+
+    this.highScoreDisplay.innerHTML = scoreToDisplay.toString() || '00';
   }
 
   /**
