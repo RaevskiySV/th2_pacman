@@ -584,7 +584,7 @@ class GameCoordinator {
     this.allowPacmanMovement = false;
     this.allowPause = false;
     this.cutscene = true;
-    this.highScore = localStorage.getItem('highScore');
+    this.highScore = localStorage.getItem(`highScore_${this.userEmail}`) || 0;
 
     if (this.firstGame) {
       setInterval(() => {
@@ -1041,7 +1041,7 @@ class GameCoordinator {
     if (this.points > (this.highScore || 0)) {
       this.highScore = this.points;
       this.highScoreDisplay.innerText = this.points;
-      localStorage.setItem('highScore', this.highScore);
+      localStorage.setItem(`highScore_${this.userEmail}`, this.highScore);
     }
 
     if (this.points >= 10000 && !this.extraLifeGiven) {
@@ -1125,7 +1125,7 @@ class GameCoordinator {
    * Displays GAME OVER text and displays the menu so players can play again
    */
   gameOver() {
-    localStorage.setItem('highScore', this.highScore);
+    localStorage.setItem(`highScore_${this.userEmail}`, this.highScore);
 
     this.sendScoreToBackend(this.highScore);
 
