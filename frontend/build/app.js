@@ -1689,7 +1689,7 @@ class GameCoordinator {
     this.allowPacmanMovement = false;
     this.allowPause = false;
     this.cutscene = true;
-    this.highScore = this.getHighScoreFromBackend();
+    this.getHighScoreFromBackend();
 
     if (this.firstGame) {
       setInterval(() => {
